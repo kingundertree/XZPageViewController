@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "XZMainViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +17,16 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor blackColor];
+    [self.window makeKeyAndVisible];
+    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[XZMainViewController new]];
+    nav.navigationBar.barTintColor = [UIColor whiteColor];
+    nav.navigationBar.translucent = NO;
+    
+    self.window.rootViewController = nav;
+    
     return YES;
 }
 

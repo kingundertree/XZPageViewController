@@ -1,5 +1,5 @@
 //
-//  XZDetailViewController.h
+//  XZWebViewController.h
 //  XZPageViewController
 //
 //  Created by xiazer on 15/4/9.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XZDetailViewController : UIViewController
-@property (nonatomic, strong) NSString *titleStr;
+@interface XZWebViewController : UIViewController
+
 @end

@@ -15,6 +15,7 @@
 		F85B35E31AD61AF800FF67F3 /* XZPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F85B35E21AD61AF800FF67F3 /* XZPageViewController.m */; };
 		F85B35E61AD61B1200FF67F3 /* XZMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F85B35E51AD61B1200FF67F3 /* XZMainViewController.m */; };
 		F85B35E91AD61B3200FF67F3 /* XZDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F85B35E81AD61B3200FF67F3 /* XZDetailViewController.m */; };
+		F85B35EC1AD64F0100FF67F3 /* XZWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F85B35EB1AD64F0100FF67F3 /* XZWebViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,8 @@
 		F85B35E51AD61B1200FF67F3 /* XZMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XZMainViewController.m; sourceTree = "<group>"; };
 		F85B35E71AD61B3200FF67F3 /* XZDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XZDetailViewController.h; sourceTree = "<group>"; };
 		F85B35E81AD61B3200FF67F3 /* XZDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XZDetailViewController.m; sourceTree = "<group>"; };
+		F85B35EA1AD64F0100FF67F3 /* XZWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XZWebViewController.h; sourceTree = "<group>"; };
+		F85B35EB1AD64F0100FF67F3 /* XZWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XZWebViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +95,8 @@
 				F85B35E51AD61B1200FF67F3 /* XZMainViewController.m */,
 				F85B35E71AD61B3200FF67F3 /* XZDetailViewController.h */,
 				F85B35E81AD61B3200FF67F3 /* XZDetailViewController.m */,
+				F85B35EA1AD64F0100FF67F3 /* XZWebViewController.h */,
+				F85B35EB1AD64F0100FF67F3 /* XZWebViewController.m */,
 				F85B35C41AD61A7900FF67F3 /* Images.xcassets */,
 				F85B35C61AD61A7900FF67F3 /* LaunchScreen.xib */,
 				F85B35B71AD61A7900FF67F3 /* Supporting Files */,
@@ -238,6 +243,7 @@
 				F85B35E31AD61AF800FF67F3 /* XZPageViewController.m in Sources */,
 				F85B35BA1AD61A7900FF67F3 /* main.m in Sources */,
 				F85B35E61AD61B1200FF67F3 /* XZMainViewController.m in Sources */,
+				F85B35EC1AD64F0100FF67F3 /* XZWebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,6 +426,7 @@
 				F85B35D91AD61A7900FF67F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F85B35DA1AD61A7900FF67F3 /* Build configuration list for PBXNativeTarget "XZPageViewControllerTests" */ = {
 			isa = XCConfigurationList;
@@ -428,6 +435,7 @@
 				F85B35DC1AD61A7900FF67F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

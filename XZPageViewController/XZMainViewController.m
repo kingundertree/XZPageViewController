@@ -7,17 +7,56 @@
 //
 
 #import "XZMainViewController.h"
+#import "XZDetailViewController.h"
+#import "XZWebViewController.h"
 
-@interface XZMainViewController ()
+@interface XZMainViewController () <XZPageViewControllerDataSource, XZPageViewControllerDelegate>
 
 @end
 
 @implementation XZMainViewController
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        NSArray *titArr = @[@"头条",@"上海",@"科技",@"经济",@"房产",@"自媒体",@"军事",@"体育"];
+        self.navTitlesArr = [NSMutableArray arrayWithArray:titArr];
+        self.dataSource = self;
+        self.delegate = self;
+    }
+    
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
 }
+
+
+#pragma mark - XZPageViewControllerDataSource
+- (NSInteger)numOfPages {
+    return self.navTitlesArr.count;
+}
+
+- (float)witdhOfNav {
+    return 80.0;
+}
+- (NSString *)titleOfNavAtIndex:(NSInteger)index {
+    return [self.navTitlesArr objectAtIndex:index];
+}
+- (UIViewController *)viewPageController:(XZPageViewController *)pageViewController contentViewControllerForNavAtIndex:(NSInteger)index {
+    if (index == 0) {
+        XZWebViewController *webVC = [[XZWebViewController alloc] init];
+        return webVC;
+    } else {
+        XZDetailViewController *detailVC = [[XZDetailViewController alloc] init];
+        detailVC.title = [NSString stringWithFormat:@"%ld",index];
+        return detailVC;
+    }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
