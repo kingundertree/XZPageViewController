@@ -33,6 +33,8 @@
     [self initData];
     [self loadNavScrollView];
     [self loadPageViewController];
+    
+    [self switchToViewControllerAtIndex:0];
 }
 
 #pragma mark - method
@@ -59,12 +61,15 @@
         navTitLab.font = [UIFont systemFontOfSize:16];
         navTitLab.textColor = [UIColor blackColor];
         navTitLab.textAlignment = NSTextAlignmentCenter;
+        navTitLab.userInteractionEnabled = YES;
         [self.navScrollView addSubview:navTitLab];
     
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tagGesture:)];
+        tap.numberOfTapsRequired = 1;
+        [navTitLab addGestureRecognizer:tap];
+        
         [self.navTitleViewsArr addObject:navTitLab];
     }
-    
-    [self navTitSelectedAtIndex:0];
 }
 
 - (void)loadPageViewController {
@@ -76,15 +81,17 @@
     self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     [self addChildViewController:self.pageViewController];
 
-    ((UIScrollView *)[self.pageViewController.view.subviews objectAtIndex:0]).delegate = self;
     self.pageViewController.dataSource = self;
     self.pageViewController.delegate = self;
     
     self.contentView = [[UIView alloc] initWithFrame:self.view.bounds];
     self.contentView = self.pageViewController.view;
     [self.view addSubview:self.contentView];
+}
 
-    [self transitionToViewControllerAtIndex:0];
+- (void)switchToViewControllerAtIndex:(NSInteger)index {
+    [self navTitSelectedAtIndex:index];
+    [self transitionToViewControllerAtIndex:index];
 }
 
 - (void)navTitSelectedAtIndex:(NSInteger)index {
@@ -154,12 +161,41 @@
     return vc;
 }
 
+- (NSInteger)indexOfNavTit:(UILabel *)lab {
+    NSInteger index = [self.navTitleViewsArr indexOfObject:lab];
+    return index;
+}
+
+#pragma mark - UIGesture Method
+- (void)tagGesture:(UITapGestureRecognizer *)gesture {
+    UILabel *navTitLab = (UILabel *)gesture.view;
+    NSInteger index = [self indexOfNavTit:navTitLab];
+
+    if (index != self.currentVCIndex) {
+        [self switchToViewControllerAtIndex:index];
+    }
+}
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
+    CGPoint point = scrollView.contentOffset;
+    
+    float displace = point.x+self.navWidth/2-1.0;
+    NSInteger navIndex = displace / self.navWidth;
+    NSLog(@"displace--->%f/%ld",displace, (long)navIndex);
+
+//    [self switchToViewControllerAtIndex:navIndex];
+}
+
 #pragma mark - UIPageViewControllerDataSource
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
     NSInteger index = [self indexOfViewController:viewController];
     if (index == 0) {
-//        index = self.navCount - 1;
-        return nil;
+        if (self.isRecycle) {
+            index = self.navCount - 1;
+        } else {
+            return nil;
+        }
     } else {
         index--;
     }
@@ -170,8 +206,11 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
     NSInteger index = [self indexOfViewController:viewController];
     if (index == self.navCount - 1) {
-//        index = 0;
-        return nil;
+        if (self.isRecycle) {
+            index = 0;
+        } else {
+            return nil;
+        }
     } else {
         index++;
     }

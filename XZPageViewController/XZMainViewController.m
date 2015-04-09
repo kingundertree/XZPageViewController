@@ -19,7 +19,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        NSArray *titArr = @[@"头条",@"上海",@"科技",@"经济",@"房产",@"自媒体",@"军事",@"体育"];
+        NSArray *titArr = @[@"头条",@"上海",@"科技",@"经济",@"房产",@"自媒体",@"军事",@"体育",@"游戏",@"图片",@"时尚"];
         self.navTitlesArr = [NSMutableArray arrayWithArray:titArr];
         self.dataSource = self;
         self.delegate = self;
@@ -41,7 +41,7 @@
 }
 
 - (float)witdhOfNav {
-    return 80.0;
+    return 60.0;
 }
 - (NSString *)titleOfNavAtIndex:(NSInteger)index {
     return [self.navTitlesArr objectAtIndex:index];

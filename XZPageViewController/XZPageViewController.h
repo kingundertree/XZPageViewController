@@ -12,6 +12,8 @@
 @protocol XZPageViewControllerDelegate;
 
 @interface XZPageViewController : UIViewController
+@property (nonatomic, assign) BOOL isRecycle;
+
 @property (nonatomic, strong) NSMutableArray *viewControllerArr;
 @property (nonatomic, strong) UIScrollView *navScrollView;
 @property (nonatomic, strong) NSMutableArray *navTitleViewsArr;
