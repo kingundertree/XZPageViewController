@@ -37,7 +37,7 @@
 
 #pragma mark - method
 - (void)initData {
-    self.currentVCIndex = -0;
+    self.currentVCIndex = 0;
     self.navTitleViewsArr = [NSMutableArray array];
     self.viewControllerArr = [NSMutableArray array];
     self.navCount = self.navTitlesArr.count;
@@ -56,7 +56,7 @@
         UILabel *navTitLab = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth/2+self.navWidth*(i-0.5), 0, self.navWidth, navHeight)];
         navTitLab.backgroundColor = [UIColor whiteColor];
         navTitLab.text = [self.navTitlesArr objectAtIndexedSubscript:i];
-        navTitLab.font = [UIFont systemFontOfSize:18];
+        navTitLab.font = [UIFont systemFontOfSize:16];
         navTitLab.textColor = [UIColor blackColor];
         navTitLab.textAlignment = NSTextAlignmentCenter;
         [self.navScrollView addSubview:navTitLab];
@@ -65,25 +65,6 @@
     }
     
     [self navTitSelectedAtIndex:0];
-}
-
-- (void)navTitSelectedAtIndex:(NSInteger)index {
-    CGPoint point = CGPointMake(index*self.navWidth, 0);
-    
-    for (NSInteger i = 0; i < self.navCount; i++) {
-        UILabel *titLab = [self.navTitleViewsArr objectAtIndex:i];
-        titLab.textColor = [UIColor blackColor];
-    }
-    
-    UILabel *titLab = [self.navTitleViewsArr objectAtIndex:index];
-
-    [UIView animateWithDuration:0.3 animations:^{
-        self.navScrollView.contentOffset = point;
-        titLab.textColor = [UIColor redColor];
-        titLab.font = [UIFont systemFontOfSize:20];
-    } completion:^(BOOL finished) {
-        
-    }];
 }
 
 - (void)loadPageViewController {
@@ -104,6 +85,26 @@
     [self.view addSubview:self.contentView];
 
     [self transitionToViewControllerAtIndex:0];
+}
+
+- (void)navTitSelectedAtIndex:(NSInteger)index {
+    CGPoint point = CGPointMake(index*self.navWidth, 0);
+    
+    for (NSInteger i = 0; i < self.navCount; i++) {
+        UILabel *titLab = [self.navTitleViewsArr objectAtIndex:i];
+        titLab.textColor = [UIColor blackColor];
+        titLab.font = [UIFont systemFontOfSize:16];
+    }
+    
+    UILabel *titLab = [self.navTitleViewsArr objectAtIndex:index];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.navScrollView.contentOffset = point;
+        titLab.textColor = [UIColor redColor];
+        titLab.font = [UIFont systemFontOfSize:18];
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 - (void)transitionToViewControllerAtIndex:(NSInteger)index {
@@ -156,53 +157,40 @@
 #pragma mark - UIPageViewControllerDataSource
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
     NSInteger index = [self indexOfViewController:viewController];
+    if (index == 0) {
+//        index = self.navCount - 1;
+        return nil;
+    } else {
+        index--;
+    }
+    
+    return [self viewControllerAtIndex:index];
+}
+
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
+    NSInteger index = [self indexOfViewController:viewController];
     if (index == self.navCount - 1) {
-        index = 0;
+//        index = 0;
+        return nil;
     } else {
         index++;
     }
     return [self viewControllerAtIndex:index];
 }
 
-- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
-    NSInteger index = [self indexOfViewController:viewController];
-    if (index == 0) {
-        index = self.navCount - 1;
-    } else {
-        index--;
-    }
-    return [self viewControllerAtIndex:index];
-}
-
-- (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController {
-    return 0;
-}
-
-- (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController {
-    return 0;
-}
-
 
 #pragma mark - UIPageViewControllerDelegate
 - (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray *)pendingViewControllers {
-    
 }
 
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed {
+    UIViewController *viewController = self.pageViewController.viewControllers[0];
     
+    NSUInteger index = [self indexOfViewController:viewController];
+    [self navTitSelectedAtIndex:index];
+    
+    self.currentVCIndex = index;
 }
-- (UIPageViewControllerSpineLocation)pageViewController:(UIPageViewController *)pageViewController spineLocationForInterfaceOrientation:(UIInterfaceOrientation)orientation {
-    return nil;
-}
-
-- (NSUInteger)pageViewControllerSupportedInterfaceOrientations:(UIPageViewController *)pageViewController {
-    return 0;
-}
-
-- (UIInterfaceOrientation)pageViewControllerPreferredInterfaceOrientationForPresentation:(UIPageViewController *)pageViewController {
-    return nil;
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

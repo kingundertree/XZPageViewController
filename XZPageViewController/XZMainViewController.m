@@ -52,7 +52,7 @@
         return webVC;
     } else {
         XZDetailViewController *detailVC = [[XZDetailViewController alloc] init];
-        detailVC.title = [NSString stringWithFormat:@"%ld",index];
+        detailVC.title = [NSString stringWithFormat:@"%ld",(long)index];
         return detailVC;
     }
 }
