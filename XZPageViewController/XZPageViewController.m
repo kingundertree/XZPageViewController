@@ -35,7 +35,7 @@
     [self loadNavScrollView];
     [self loadPageViewController];
     
-    [self switchToViewControllerAtIndex:0];
+    [self switchToViewControllerAtIndex:3];
 }
 
 #pragma mark - method
