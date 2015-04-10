@@ -143,7 +143,7 @@
         
         [self.pageViewController setViewControllers:@[viewController]
                                           direction:direction
-                                           animated:YES
+                                           animated:self.isPageChangeWithAnimation
                                          completion:^(BOOL completed){// none
                                          }];
     }

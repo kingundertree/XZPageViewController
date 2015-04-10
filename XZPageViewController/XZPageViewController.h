@@ -13,6 +13,7 @@
 
 @interface XZPageViewController : UIViewController
 @property (nonatomic, assign) BOOL isRecycle;
+@property (nonatomic, assign) BOOL isPageChangeWithAnimation;
 
 @property (nonatomic, strong) NSMutableArray *viewControllerArr;
 @property (nonatomic, strong) UIScrollView *navScrollView;
