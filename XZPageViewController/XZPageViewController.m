@@ -22,7 +22,8 @@
 @property (nonatomic, assign) NSInteger navCount;
 @property (nonatomic, assign) float navWidth;
 @property (nonatomic, assign) NSInteger currentVCIndex;
-
+@property (nonatomic, assign) BOOL isRecycle;
+@property (nonatomic, assign) BOOL isPageChangeWithAnimation;
 @end
 
 @implementation XZPageViewController
@@ -44,7 +45,10 @@
     self.viewControllerArr = [NSMutableArray array];
     self.navCount = self.navTitlesArr.count;
     self.navWidth = [self.dataSource witdhOfNav];
+    self.isRecycle = [self.dataSource canPageViewControllerRecycle];
+    self.isPageChangeWithAnimation = [self.dataSource canPageViewControllerAnimation];
 }
+
 - (void)loadNavScrollView {
     self.navScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, navHeight)];
     self.navScrollView.delegate = self;

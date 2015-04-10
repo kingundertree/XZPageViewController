@@ -32,9 +32,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    self.isRecycle = NO;
-    self.isPageChangeWithAnimation = YES;
 }
 
 
@@ -58,6 +55,14 @@
         detailVC.title = [NSString stringWithFormat:@"%ld",(long)index];
         return detailVC;
     }
+}
+
+- (BOOL)canPageViewControllerRecycle {
+    return NO;
+}
+
+- (BOOL)canPageViewControllerAnimation {
+    return YES;
 }
 
 

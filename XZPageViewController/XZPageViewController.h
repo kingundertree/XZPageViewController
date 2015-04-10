@@ -12,9 +12,6 @@
 @protocol XZPageViewControllerDelegate;
 
 @interface XZPageViewController : UIViewController
-@property (nonatomic, assign) BOOL isRecycle;
-@property (nonatomic, assign) BOOL isPageChangeWithAnimation;
-
 @property (nonatomic, strong) NSMutableArray *viewControllerArr;
 @property (nonatomic, strong) UIScrollView *navScrollView;
 @property (nonatomic, strong) NSMutableArray *navTitleViewsArr;
@@ -38,6 +35,10 @@
 - (NSString *)titleOfNavAtIndex:(NSInteger)index;
 // pageViewController
 - (UIViewController *)viewPageController:(XZPageViewController *)pageViewController contentViewControllerForNavAtIndex:(NSInteger)index;
+// 是否循环
+- (BOOL)canPageViewControllerRecycle;
+// 是否动画切换
+- (BOOL)canPageViewControllerAnimation;
 @end
 
 @protocol XZPageViewControllerDelegate <NSObject>
