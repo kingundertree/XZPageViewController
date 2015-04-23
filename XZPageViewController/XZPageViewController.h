@@ -19,11 +19,6 @@
 @property (nonatomic, assign) id<XZPageViewControllerDataSource> dataSource;
 @property (nonatomic, assign) id<XZPageViewControllerDelegate> delegate;
 
-// 加载pageViewController
-- (void)loadPageViewController;
-// 加载导航栏
-- (void)loadNavScrollView;
-
 @end
 
 @protocol XZPageViewControllerDataSource <NSObject>
